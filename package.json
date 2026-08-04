@@ -1,0 +1,32 @@
+{
+  "name": "canva-team-exit-automation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Chrome extension that helps a Canva user copy designs they own out of a team, verify each copy, trash the originals, then leave the team.",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "npm run build:pages && npm run build:content",
+    "build:pages": "vite build",
+    "build:content": "vite build --config vite.config.content.ts",
+    "watch:pages": "vite build --watch",
+    "watch:content": "vite build --config vite.config.content.ts --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest --run",
+    "verify": "npm run typecheck && npm run test && npm run build"
+  },
+  "dependencies": {
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.2.5",
+    "@types/node": "26.1.2",
+    "jsdom": "29.1.1",
+    "typescript": "7.0.2",
+    "vite": "8.2.0",
+    "vitest": "4.1.10"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Canva Team Exit Automation",
+  "version": "0.1.0",
+  "description": "Copy designs you own out of a Canva team, verify each copy, trash the originals, then leave the team when eligible.",
+  "minimum_chrome_version": "110",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["https://www.canva.com/*"],
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Canva Team Exit Automation",
+    "default_popup": "popup/index.html"
+  },
+  "options_page": "options/index.html",
+  "content_scripts": [
+    {
+      "matches": ["https://www.canva.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

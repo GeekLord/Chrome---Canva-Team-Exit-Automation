@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Canva Team Exit Automation — Advanced settings</title>
+    <script type="module" crossorigin src="/options.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/report.js">
+    <link rel="modulepreload" crossorigin href="/assets/format.js">
+    <link rel="stylesheet" crossorigin href="/assets/options.css">
+  </head>
+  <body>
+    <header class="page-header">
+      <h1>Canva Team Exit Automation</h1>
+      <p>Advanced settings. Changes apply to the next action the engine takes.</p>
+      <p class="status" id="save-status" role="status" aria-live="polite"></p>
+    </header>
+
+    <main>
+      <section class="card" aria-labelledby="execution-heading">
+        <h2 id="execution-heading">Execution mode</h2>
+        <p class="hint">
+          A fresh browser profile starts in dry-run mode with live execution off. Live runs copy designs, move verified
+          originals to Canva trash, and can leave a team on your behalf.
+        </p>
+        <div id="execution-fields"></div>
+      </section>
+
+      <section class="card" aria-labelledby="pacing-heading">
+        <h2 id="pacing-heading">Pacing and resilience</h2>
+        <p class="hint">
+          Slower is safer. Delays carry random jitter, and repeated failures widen the gap before the next attempt.
+        </p>
+        <div id="pacing-fields"></div>
+      </section>
+
+      <section class="card" aria-labelledby="discovery-heading">
+        <h2 id="discovery-heading">Discovery and review</h2>
+        <div id="discovery-fields"></div>
+      </section>
+
+      <section class="card card--danger" aria-labelledby="overrides-heading">
+        <h2 id="overrides-heading">Advanced overrides</h2>
+        <p class="hint">
+          These switch off safety rules that exist to stop irreversible mistakes. Leave them off unless you know exactly
+          why you need them.
+        </p>
+        <div id="override-fields"></div>
+      </section>
+
+      <section class="card" aria-labelledby="diagnostics-heading">
+        <h2 id="diagnostics-heading">Diagnostics</h2>
+        <div id="diagnostics-fields"></div>
+        <h3>Selector map</h3>
+        <p class="hint" id="selector-version"></p>
+        <ul class="notes" id="selector-notes"></ul>
+      </section>
+
+      <section class="card" aria-labelledby="data-heading">
+        <h2 id="data-heading">Local data</h2>
+        <p class="hint">
+          Run state and logs live in this browser profile's extension storage. Nothing is uploaded anywhere.
+        </p>
+        <div id="data-fields"></div>
+        <div class="row" id="data-actions"></div>
+        <p class="hint" id="data-summary"></p>
+      </section>
+    </main>
+
+  </body>
+</html>
