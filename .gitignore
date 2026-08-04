@@ -1,0 +1,13 @@
+node_modules/
+dist/
+
+# Local exports and diagnostics
+*.log
+diag.json
+canva-team-exit-*.json
+canva-team-exit-*.csv
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+*.swp
