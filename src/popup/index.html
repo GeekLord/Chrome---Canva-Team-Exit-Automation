@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Canva Team Exit Automation</title>
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to controls</a>
+
+    <header class="app-header">
+      <div class="app-header__titles">
+        <h1>Canva Team Exit</h1>
+        <p class="app-header__subtitle" id="run-subtitle">No run yet</p>
+      </div>
+      <span class="mode-badge" id="mode-badge" role="status" aria-live="polite">Dry run</span>
+    </header>
+
+    <p class="attention" id="attention" role="alert" hidden></p>
+
+    <main id="main">
+      <section class="panel" id="page-panel" aria-labelledby="page-heading">
+        <h2 id="page-heading">Canva tab</h2>
+        <dl class="kv" id="page-details"></dl>
+        <div class="row" id="page-actions"></div>
+      </section>
+
+      <section class="panel panel--warn" id="disclosure-panel" aria-labelledby="disclosure-heading" hidden>
+        <h2 id="disclosure-heading">Before your first live run</h2>
+        <div id="disclosure-body"></div>
+      </section>
+
+      <section class="panel" id="setup-panel" aria-labelledby="setup-heading">
+        <h2 id="setup-heading">1. Choose teams and destination</h2>
+        <div class="row">
+          <button type="button" id="scan-teams" class="btn">Scan teams</button>
+          <button type="button" id="scan-items" class="btn">Scan designs</button>
+        </div>
+
+        <fieldset class="field">
+          <legend>Source teams to exit</legend>
+          <div id="team-list" class="checklist" role="group" aria-describedby="team-list-hint"></div>
+          <p class="hint" id="team-list-hint">Designs are copied out of these teams, one team at a time.</p>
+        </fieldset>
+
+        <div class="field">
+          <label for="destination-select">Copy destination</label>
+          <select id="destination-select"></select>
+          <p class="hint">Must be a workspace you can switch into in this session, and not a source team.</p>
+        </div>
+
+        <div class="field">
+          <label for="mode-select">Execution mode</label>
+          <select id="mode-select"></select>
+          <p class="hint" id="mode-hint"></p>
+        </div>
+      </section>
+
+      <section class="panel" id="review-panel" aria-labelledby="review-heading" hidden>
+        <h2 id="review-heading">2. Review before running</h2>
+        <dl class="kv" id="dry-run-summary"></dl>
+
+        <div class="row row--between">
+          <div class="row">
+            <label class="visually-hidden" for="item-filter">Filter items</label>
+            <select id="item-filter">
+              <option value="all">All items</option>
+              <option value="included">Included only</option>
+              <option value="excluded">Excluded only</option>
+              <option value="unresolved">Needs attention</option>
+            </select>
+          </div>
+          <div class="row">
+            <button type="button" class="btn btn--ghost" id="include-all">Include all</button>
+            <button type="button" class="btn btn--ghost" id="exclude-all">Exclude all</button>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table class="items" id="item-table">
+            <caption class="visually-hidden">Designs discovered in the selected teams</caption>
+            <thead>
+              <tr>
+                <th scope="col">Include</th>
+                <th scope="col">Design</th>
+                <th scope="col">Team</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Copy</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="item-rows"></tbody>
+          </table>
+        </div>
+        <p class="hint" id="item-table-note"></p>
+      </section>
+
+      <section class="panel" id="confirm-panel" aria-labelledby="confirm-heading" hidden>
+        <h2 id="confirm-heading">3. Confirm and run</h2>
+        <div id="confirmations" class="checklist"></div>
+        <p class="hint" id="start-guard" role="status" aria-live="polite"></p>
+        <div class="row" id="run-controls"></div>
+      </section>
+
+      <section class="panel" id="progress-panel" aria-labelledby="progress-heading" hidden>
+        <h2 id="progress-heading">Progress</h2>
+        <p class="current-action" id="current-action" role="status" aria-live="polite"></p>
+        <progress id="run-progress" max="100" value="0" aria-labelledby="progress-heading"></progress>
+        <dl class="kv kv--grid" id="counters"></dl>
+      </section>
+
+      <section class="panel panel--warn" id="assist-panel" aria-labelledby="assist-heading" hidden>
+        <h2 id="assist-heading">Manual step needed</h2>
+        <p id="assist-instruction" role="alert"></p>
+        <div class="row" id="assist-actions"></div>
+      </section>
+
+      <section class="panel panel--warn" id="leave-panel" aria-labelledby="leave-heading" hidden>
+        <h2 id="leave-heading">Leave team</h2>
+        <div id="leave-body"></div>
+      </section>
+
+      <section class="panel panel--error" id="issues-panel" aria-labelledby="issues-heading" hidden>
+        <h2 id="issues-heading">Issues</h2>
+        <ul class="issues" id="issue-list"></ul>
+      </section>
+
+      <section class="panel" id="report-panel" aria-labelledby="report-heading" hidden>
+        <h2 id="report-heading">Run report</h2>
+        <dl class="kv kv--grid" id="report-counters"></dl>
+        <div id="report-teams"></div>
+        <div class="row">
+          <button type="button" class="btn" id="export-json">Export JSON</button>
+          <button type="button" class="btn" id="export-csv">Export CSV</button>
+          <button type="button" class="btn btn--ghost" id="new-run">Start a new run</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <button type="button" class="link-button" id="open-options">Advanced settings</button>
+      <span class="selector-version" id="selector-version"></span>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
