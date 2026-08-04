@@ -191,5 +191,6 @@ Both surfaces are keyboard reachable with visible focus states, form controls ha
 
 ## Reference documents
 
+- `DEVELOPMENT.md` — maintainer notes: build internals, design decisions, invariants that must not regress, testing traps, how to update the selector map
 - `canva-team-migration-extension-spec.md` — functional requirements, data model, state machine, error taxonomy
 - `canva-team-exit-automation-chrome-web-store-project-info.md` — listing copy, permission justifications, privacy posture
